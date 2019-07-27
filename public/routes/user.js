@@ -6,13 +6,14 @@ route.use('/public', express.static('./public/views'))
 
 
 const pool = mysql.createPool({
+    connectionLimit: 10,
     host: 'localhost',
     database: 'atroha',
     user: 'root'
 });
 
 
-function getConnection(){
+function getConnection() {
     return pool;
 }
 
