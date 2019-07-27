@@ -10,6 +10,7 @@ app.get('/', ()=>{
     resizeBy.send("Hello guys welcome to our root nodeJs");
 });
 
-app.listen('3003', ()=>{
-    console.log("server express listen to the port 3000");
+const PORT = process.env.PORT || 3003;
+app.listen(PORT, ()=>{
+    console.log("server express listen to the port "+PORT);
 });
