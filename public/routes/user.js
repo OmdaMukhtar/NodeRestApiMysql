@@ -61,7 +61,7 @@ route.post('/create_user/', (req, res) => {
             return;
         }
     });
-    res.redirect('localhost:3003/api/users');
+    // res.redirect('lyocalhost:3003/api/users');
     res.end();
 });
 
