@@ -6,8 +6,9 @@ app.use(morgan('short'));
 app.use(router);
 app.use('/public', express.static('public/views'))
 
-app.get('/', ()=>{
-    resizeBy.send("Hello guys welcome to our root nodeJs");
+app.get('/', (req, res)=>{
+
+    res.send("Hello guys welcome to our root nodeJs");
 });
 
 const PORT = process.env.PORT || 3003;
