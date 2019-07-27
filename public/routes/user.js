@@ -1,8 +1,10 @@
 var express = require('express');
 const mysql = require('mysql');
+const body_parser = require('body-parser');
 
 const route = express.Router();
 route.use('/public', express.static('./public/views'))
+route.use(body_parser.urlencoded({extended:false}));
 
 
 const pool = mysql.createPool({
