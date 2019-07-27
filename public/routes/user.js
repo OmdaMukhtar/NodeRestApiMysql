@@ -7,9 +7,9 @@ route.use('/public', express.static('./public/views'))
 
 
 const connection = mysql.createConnection({
-    host:'localhost',
-    database:'atroha',
-    user:'root'
+    host: 'localhost',
+    database: 'atroha',
+    user: 'root'
 });
 
 
@@ -18,10 +18,10 @@ const connection = mysql.createConnection({
  * 
  * @returns json
  */
-route.get('/api/users', (req, res) =>{
+route.get('/api/users', (req, res) => {
     var queryString = 'select * from users';
-    connection.query(queryString, (err, row, field)=>{
-        if(err){
+    connection.query(queryString, (err, row, field) => {
+        if (err) {
             res.sendStatus(500);
             return
         }
@@ -29,16 +29,29 @@ route.get('/api/users', (req, res) =>{
     });
 });
 
-
-route.post('/create_user/', (req, res)=>{
-    var queryString = "insert into users(name, email) values(?, ?)";
-    connection.query(queryString, [req.body.username, req.body.email], (err, row, field)=>{
-        // console.log(err);
+/**
+ * Get user by id
+ */
+route.get('/api/users/:id', (req, res)=>{
+    var queryString = "SELECT * FROM users WHERE id=?";
+    connection.query(queryString, [req.params.id], (err, row, field)=>{
         if(err){
+            res.send(err);
+        }
+        res.json(row);
+    });
+});
+
+
+route.post('/create_user/', (req, res) => {
+    var queryString = "insert into users(name, email) values(?, ?)";
+    connection.query(queryString, [req.body.username, req.body.email], (err, row, field) => {
+        // console.log(err);
+        if (err) {
             res.sendStatus(500);
             return;
         }
-    }); 
+    });
     res.redirect('localhost:3003/api/users');
     res.end();
 });
